@@ -20,4 +20,4 @@ DB = "mongodb://<USERNAME>:<PASSWORD>@ds111765.mlab.com:11765/brunswick"
 
 Requires a complete refactor, code was taken from a previous weekend project (2.5 days) from bootcamp where we were midway learning React and Restful API's/PostGres. Parts are broken, Styling only for mobile - also quite scrappy.
 
-This project was soley created to understand/learn about MongoDb and Mongoose.
+This project was solely created to understand/learn about MongoDb and Mongoose.
