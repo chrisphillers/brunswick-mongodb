@@ -5,14 +5,7 @@ import MoreInfo from "./MoreInfo";
 import "../styles/Menu.scss";
 
 class Menu extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { basket: [] };
-    this.getCourse = this.getCourse.bind(this);
-    this.basketReceiveRemove = this.basketReceiveRemove.bind(this);
-    this.basketReceiveAdd = this.basketReceiveAdd.bind(this);
-    this.calculate = this.calculate.bind(this);
-  }
+  state = { basket: [] };
 
   basketReceiveAdd = id => {
     this.props.basketStatus();
@@ -109,7 +102,7 @@ class Menu extends React.Component {
                   </button>
                 </div>
               </div>
-              <h3 className="menuitems__info">{foodItem.headline}</h3>
+              {/* <h3 className="menuitems__info">{foodItem.headline}</h3> */}
               <h2>{`£${foodItem.price}`}</h2>
             </div>
             <hr />
@@ -120,24 +113,18 @@ class Menu extends React.Component {
 
   calculate = () => {
     let delivery = 2.5;
-    let calc = [];
-
-    if (this.state.basket === []) {
-      calc = [];
-    } else {
-      calc = this.state.basket.map(order => {
-        console.log("hi there", { order });
-        console.log(this.props.menu[order.menuItemId]);
-        // return parseInt(this.props.menu[order.menuItemId].price, 10 * order.quantity);
-        return this.props.menu[order.menuItemId].price * order.quantity;
-      });
-    }
-    let calcTotal = calc.reduce((total, amount) => total + amount) + delivery;
-
-    //
-
-    console.log("calculate", calc, calcTotal);
+    let calc = this.state.basket.map(order => {
+      console.log("hi there", { order });
+      console.log(this.props.menu[order.menuItemId]);
+      // return parseInt(this.props.menu[order.menuItemId].price, 10 * order.quantity);
+      return this.props.menu[order.menuItemId].price * order.quantity;
+    });
   };
+  // let calcTotal = calc.reduce((total, amount) => total + amount) + delivery;
+
+  //
+
+  // console.log("calculate", calc, calcTotal);
 
   render() {
     return (
