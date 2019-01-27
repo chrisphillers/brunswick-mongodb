@@ -1,0 +1,29 @@
+@import "defaults";
+
+.basket {
+  top: 0;
+  animation: bounce 1s;
+
+  &__order {
+    display: flex;
+    flex-direction: row;
+    // justify-content: space-around;
+    align-items: baseline;
+    // display: inline;
+  }
+}
+
+.hidden {
+  position: fixed;
+
+  bottom: -100%;
+  left: 0px;
+  width: 100vw;
+  height: 100vh;
+  background-color: aquamarine;
+  transition: bottom 0.5s;
+  margin-right: 0px;
+  opacity: 0.9;
+  z-index: 1;
+  animation: bounce 1s;
+}

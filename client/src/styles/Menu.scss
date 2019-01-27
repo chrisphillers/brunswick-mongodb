@@ -1,0 +1,39 @@
+@import "defaults";
+
+.menu {
+  padding: 0;
+}
+
+.menuitems {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+
+  &__row {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__order {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: baseline;
+    // display: inline;
+  }
+
+  &__info {
+    width: 70%;
+  }
+}
+
+hr {
+  margin: 0;
+  padding: 0;
+}
+
+// .menuitems__details {
+//   display: flex;
+//   //   flex-direction: column;
+//   align-items: flex-start;
+// }

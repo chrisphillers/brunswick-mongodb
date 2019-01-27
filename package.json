@@ -1,25 +1,16 @@
 {
-  "name": "brunswick",
+  "name": "fullstack_app",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "concurrently \"cd backend && node server.js\" \"cd client && npm start\""
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/chrisphillers/brunswick-mungodb.git"
-  },
+  "keywords": [],
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/chrisphillers/brunswick-mungodb/issues"
-  },
-  "homepage": "https://github.com/chrisphillers/brunswick-mungodb#readme",
   "dependencies": {
-    "body-parser": "^1.18.3",
-    "express": "^4.16.4",
-    "mongoose": "^5.4.6",
-    "react-router-dom": "^4.3.1"
+    "concurrently": "^4.0.1",
+    "node-sass": "^4.11.0"
   }
 }
