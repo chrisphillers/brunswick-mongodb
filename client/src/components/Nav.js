@@ -10,10 +10,10 @@ const Nav = props => {
 
   return (
     <div className="nav">
-      <img className="nav__logo" src={logoimage} alt="logo" />
+      <img className="nav__logo" src={logoimage} alt="logo-alt" />
       <img
         className="nav__basket"
-        alt="basket"
+        alt="basket-alt"
         onClick={() => props.openBasket()}
         src={basketFull}
       />

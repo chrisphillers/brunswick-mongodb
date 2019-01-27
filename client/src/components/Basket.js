@@ -51,11 +51,11 @@ class Basket extends React.Component {
           })}
         </ul>
         <span>
-          <h1>Delivery Charge</h1>
-          <h1>£2.5</h1>
+          <h2>Delivery Charge</h2>
+          <h2>£2.5</h2>
         </span>
         <span>
-          <h1>Order Total</h1>
+          <h2>Order Total</h2>
           {/* <h1>{this.props.calculate}</h1> */}
           {/* <h1>{this.props.menu[item.menuItemId].price * item.quantity}</h1> */}
         </span>

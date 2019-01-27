@@ -41,40 +41,20 @@ router.get("/getData", (req, res) => {
   });
 });
 
-// this is our update method
-// this method overwrites existing data in our database
-router.post("/updateData", (req, res) => {
-  const { id, update } = req.body;
-  Menu.findOneAndUpdate(id, update, err => {
-    if (err) return res.json({ success: false, error: err });
-    return res.json({ success: true });
-  });
-});
-
-// this is our delete method
-// this method removes existing data in our database
-router.delete("/deleteData", (req, res) => {
-  const { id } = req.body;
-  Menu.findOneAndDelete(id, err => {
-    if (err) return res.send(err);
-    return res.json({ success: true });
-  });
-});
-
 // this is our create methid
 // this method adds new data in our database
 router.post("/putData", (req, res) => {
   let data = new Order();
 
-  const { id, message } = req.body;
+  const { id, order } = req.body;
 
-  if ((!id && id !== 0) || !message) {
+  if ((!id && id !== 0) || !order) {
     return res.json({
       success: false,
       error: "INVALID INPUTS"
     });
   }
-  data.message = message;
+  data.order = order;
   data.id = id;
   data.save(err => {
     if (err) return res.json({ success: false, error: err });

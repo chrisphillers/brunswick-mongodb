@@ -36,50 +36,6 @@ class App extends Component {
       .then(res => this.setState({ data: res.data }));
   };
 
-  putDataToDB = message => {
-    let currentIds = this.state.data.map(data => data.id);
-    let idToBeAdded = 0;
-    while (currentIds.includes(idToBeAdded)) {
-      ++idToBeAdded;
-    }
-
-    axios
-      .post("http://localhost:3002/api/putData", {
-        id: idToBeAdded,
-        message: message
-      })
-      .then(() => this.getDataFromDb());
-  };
-
-  deleteFromDB = idTodelete => {
-    let objIdToDelete = null;
-    this.state.data.forEach(dat => {
-      if (dat.id == idTodelete) {
-        objIdToDelete = dat._id;
-      }
-    });
-
-    axios.delete("http://localhost:3002/api/deleteData", {
-      data: {
-        id: objIdToDelete
-      }
-    });
-  };
-
-  updateDB = (idToUpdate, updateToApply) => {
-    let objIdToUpdate = null;
-    this.state.data.forEach(dat => {
-      if (dat.id == idToUpdate) {
-        objIdToUpdate = dat._id;
-      }
-    });
-
-    axios.post("http://localhost:3002/api/updateData", {
-      id: objIdToUpdate,
-      update: { message: updateToApply }
-    });
-  };
-
   basketStatus = () => {
     this.setState({ basketStatus: true });
   };
@@ -101,8 +57,23 @@ class App extends Component {
     this.postOrder(finalOrder);
   };
 
-  postOrder = finalOrder => {
-    console.log({ finalOrder }, "postorder!!!");
+  postOrder = currentOrder => {
+    let currentIds = this.state.data.map(data => data.id);
+    let idToBeAdded = 0;
+    while (currentIds.includes(idToBeAdded)) {
+      ++idToBeAdded;
+    }
+
+    axios
+      .post("http://localhost:3002/api/putData", {
+        // id: idToBeAdded,
+        order: currentOrder
+      })
+      .then(data => {
+        console.log(data);
+        alert("15 mins to Kale o'clock!");
+      })
+      .then(() => this.getDataFromDb());
   };
 
   render() {
@@ -124,58 +95,6 @@ class App extends Component {
           showBasket={this.state.showBasket}
           basketStatus={this.basketStatus}
         />
-
-        <h1 className="hotpink">HI THERE</h1>
-        <ul>
-          {data.length <= 0
-            ? "NO DB ENTRIES YET"
-            : data.map(dat => (
-                <li key={data.message}>
-                  <span> id: </span> {dat.id} <br />
-                  <span> data: </span>
-                  {dat.message}
-                </li>
-              ))}
-        </ul>
-        <div>
-          <input
-            type="text"
-            onChange={e => this.setState({ message: e.target.value })}
-            placeholder="add something in the database"
-          />
-          <button onClick={() => this.putDataToDB(this.state.message)}>
-            ADD
-          </button>
-        </div>
-        <div>
-          <input
-            type="text"
-            onChange={e => this.setState({ idToDelete: e.target.value })}
-            placeholder="put id of item to delete here"
-          />
-          <button onClick={() => this.deleteFromDB(this.state.idToDelete)}>
-            DELETE
-          </button>
-        </div>
-        <div>
-          <input
-            type="text"
-            onChange={e => this.setState({ idToUpdate: e.target.value })}
-            placeholder="id of item to update here"
-          />
-          <input
-            type="text"
-            onChange={e => this.setState({ updateToApply: e.target.value })}
-            placeholder="put new value of the item here"
-          />
-          <button
-            onClick={() =>
-              this.updateDB(this.state.idToUpdate, this.state.updateToApply)
-            }
-          >
-            UPDATE
-          </button>
-        </div>
       </div>
     );
   }

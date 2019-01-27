@@ -1,6 +1,6 @@
 import React from "react";
-// import Basket from "./Basket";
-// import MoreInfo from "./MoreInfo";
+import Basket from "./Basket";
+import MoreInfo from "./MoreInfo";
 
 import "../styles/Menu.scss";
 
@@ -45,7 +45,7 @@ class Menu extends React.Component {
     this.calculate();
   };
 
-  basketReceiveRemove(id) {
+  basketReceiveRemove = id => {
     const existingItem = this.state.basket.find(element => {
       return element.menuItemId === id;
     });
@@ -72,27 +72,19 @@ class Menu extends React.Component {
       );
     }
     this.calculate();
-  }
+  };
 
-  getCourse(course) {
+  getCourse = course => {
     console.log(this.props.menu);
     return this.props.menu
       .filter(item => item.type === course)
       .map(foodItem => {
-        // console.log(this.state.basket);
-        // let counter = typeof this.state.basket[foodItem.id].quantity === undefined ? 0 : this.state.basket[foodItem.id].quantity;
-        //  const basketQuant =
-        // let counter = typeof this.state.basket[foodItem.id] === undefined ? 0: this.state.basket[0].quantity;
         let counter =
           typeof this.state.basket[foodItem.id] === "undefined"
             ? 0
             : this.state.basket[foodItem.id].quantity;
-        // console.log(this.state.basket[0].quantity);
 
         console.log(counter);
-        // foodItem.id
-        // const inBasket = order.items.length && order.items.map(item => item[0]).includes(menuItem.id);
-        // const count = inBasket ? order.items.filter(item => item[0] === menuItem.id)[0][1] : 0;
 
         return (
           <li key={foodItem.id}>
@@ -124,35 +116,28 @@ class Menu extends React.Component {
           </li>
         );
       });
-  }
+  };
 
-  calculate() {
+  calculate = () => {
     let delivery = 2.5;
-    let calc = this.state.basket.map(order => {
-      console.log("hi there", { order });
-      console.log(this.props.menu[order.menuItemId]);
-      // return parseInt(this.props.menu[order.menuItemId].price, 10 * order.quantity);
-      return this.props.menu[order.menuItemId].price * order.quantity;
-    });
-    let calcTotal = calc.reduce((total, amount) => total + amount);
+    let calc = [];
+
+    if (this.state.basket === []) {
+      calc = [];
+    } else {
+      calc = this.state.basket.map(order => {
+        console.log("hi there", { order });
+        console.log(this.props.menu[order.menuItemId]);
+        // return parseInt(this.props.menu[order.menuItemId].price, 10 * order.quantity);
+        return this.props.menu[order.menuItemId].price * order.quantity;
+      });
+    }
+    let calcTotal = calc.reduce((total, amount) => total + amount) + delivery;
 
     //
 
     console.log("calculate", calc, calcTotal);
-  }
-
-  // calculate() {
-  //   const menu = this.props.menu;
-  //   console.log(menu);
-  //   const calcTotal = this.state.basket
-  //     .map(
-  //       order =>
-  //         menu.find(menuItem => menuItem.id === order[0]).price * order[1]
-  //     )
-  //     .reduce((total, amount) => total + amount);
-  //   return calcTotal;
-  //   console.log(calcTotal);
-  // }
+  };
 
   render() {
     return (
@@ -167,12 +152,9 @@ class Menu extends React.Component {
           <h1>DESSERT</h1>
           {this.getCourse("dessert")}
         </ul>
-        {/* <MoreInfo
-          basket={this.state.basket}
-          menu={this.props.menu}
-          /> */}
+        <MoreInfo basket={this.state.basket} menu={this.props.menu} />
 
-        {/* <Basket
+        <Basket
           basket={this.state.basket}
           menu={this.props.menu}
           receiveOrder={this.props.receiveOrder}
@@ -182,7 +164,7 @@ class Menu extends React.Component {
           closeBasket={this.props.closeBasket}
           showBasket={this.props.showBasket}
           basketStatus={this.basketStatus}
-        /> */}
+        />
       </div>
     );
   }
